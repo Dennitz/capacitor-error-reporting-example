@@ -1,5 +1,6 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Camera } from '@capacitor/camera';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -8,6 +9,36 @@ window.customElements.define(
       super();
 
       SplashScreen.hide();
+
+      // This could be used if `pluginId` and `methodName` were exposed on
+      // `cap.Exception` objects, as demonstrated in the GitHub issue.
+      // For this to have any effect, the `.catch(console.log)` on the example errors
+      // below has to be removed.
+      //
+      // window.addEventListener('unhandledrejection', err => {
+      //     if (err.reason?.code === 'UNIMPLEMENTED'
+      //         && err.reason?.pluginId
+      //         && err.reason?.methodName
+      //     ) {
+      //         // Get platform: 'android', 'ios', or 'web'.
+      //         // Can be done for example using the `@capacitor/device` plugin.
+      //         const platform = 'xxx'
+      //         console.log(`${err.reason.pluginId}.${err.reason.methodName} is not implemented on platform ${platform}.`)
+      //     }
+      // })
+
+      // Trigger example error on iOS. Comment this out when running on Android.
+      LocalNotifications.listChannels()
+          .then(() => console.log('listChannels success. This will not happen on iOS.'))
+          .catch(console.log)
+
+      // Trigger example error on Android Comment this out when running on iOS.
+      // Camera.getLimitedLibraryPhotos()
+      //     .then(() => console.log('getLimitedLibraryPhotos success. This will not happen on Android.'))
+      //     .catch(console.log)
+
+      // Uncomment this to trigger an example error that shows a precise stacktrace.
+      // throw new Error('Test error with precise stacktrace.')
 
       const root = this.attachShadow({ mode: 'open' });
 
