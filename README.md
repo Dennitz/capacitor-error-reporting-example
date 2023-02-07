@@ -1,3 +1,6 @@
+
+Minimal sample application for https://github.com/ionic-team/capacitor/issues/6279
+
 ## Created with Capacitor Create App
 
 This app was created using [`@capacitor/create-app`](https://github.com/ionic-team/create-capacitor-app),
